@@ -93,8 +93,8 @@ def primos_entre_si(a, b):
 
 def gen_rsa_key():
     #Definindo valores rsa
-    p = gerar_primo(256)
-    q = gerar_primo(256)
+    p = gerar_primo(4096)
+    q = gerar_primo(4096)
     n = p * q
 
     m = (p-1) * (q-1)
@@ -117,6 +117,7 @@ def decrip_wtih_rsa(msg, chave):
 
 
 if __name__ == '__main__':
+    ini = time.perf_counter()
     chave_publica, chave_privada = gen_rsa_key()
 
     mensagem = "The information security is of significant importance to ensure the privacy of communications"
@@ -126,3 +127,7 @@ if __name__ == '__main__':
 
     original = decrip_wtih_rsa(encryp, chave_privada)
     print("Decifrado:", original)
+
+    fim = time.perf_counter()
+    
+    print(f"Tempo TOTAL: {fim - ini:.10f} segundos")

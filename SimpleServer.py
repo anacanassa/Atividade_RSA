@@ -1,6 +1,8 @@
 from socket import *
 import Utils
-import ast
+import time
+
+ini = time.perf_counter()
 
 #Definindo valores rsa
 chavePublicaServer, chavePrivadaServer = Utils.gen_rsa_key()
@@ -21,10 +23,7 @@ connectionSocket.send(bytes(str(chavePublicaServer), "UTF-8"))
 clientr2 = connectionSocket.recv(65000)
 clientinfo = str(clientr2,"utf-8")
 
-parte1, parte2 = clientinfo.split("),")
-
-chavePublicaClient = ast.literal_eval(parte1 + ')')
-mensagem = ast.literal_eval(parte2)
+chavePublicaClient, mensagem = map(int,clientinfo.split(","))
 
 print(mensagem)
 
@@ -36,8 +35,12 @@ capitalizedSentence = decripReceived.upper() # processamento
 
 criptCapitalized = Utils.crip_wtih_rsa(capitalizedSentence, chavePublicaClient)
 
-connectionSocket.send(bytes(str(criptCapitalized), "UTF-8"))
+connectionSocket.send(bytes(criptCapitalized, "UTF-8"))
 
 sent = capitalizedSentence
 print ("Sent back to Client: ", sent)
 connectionSocket.close()
+
+fim = time.perf_counter()
+
+print(f"Tempo: {fim - ini:.10f} segundos")
