@@ -260,6 +260,9 @@ Ela não deve ser utilizada como implementação de criptografia para sistemas r
 ## Autores
 
 Ana Beatriz 081220007
-Erik 081220014
-Estela 081220015
+
+Erik 081220015
+
+Estela 081220014
+
 Pedro 081220044
